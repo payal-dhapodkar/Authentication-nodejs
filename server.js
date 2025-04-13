@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // if (process.env.NODE_ENV !== "production") {
 //   require("dotenv").config();
 // }
@@ -227,7 +227,7 @@ app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 //   next()
 // }
 
-=======
+
 // if (process.env.NODE_ENV !== "production") {
 //   require("dotenv").config();
 // }
@@ -237,52 +237,52 @@ app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 //   require("dotenv").config()
 // }
 
-const env = process.env.NODE_ENV || 3000 ; // fallback so it won’t crash
-console.log('Current environment:', env);
+// const env = process.env.NODE_ENV || 3000 ; // fallback so it won’t crash
+// console.log('Current environment:', env);
 
 // Importing all Libraies that we installed using npm
 //  const express = require("express");
-import express from 'express';
- const app = express();
+// import express from 'express';
+//  const app = express();
 //  const bcrypt = require("bcrypt") //import bcrypt package
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 
 //  const passport = require("passport")
 //  const initializePassport = require("./passport-config")
 //  const flash = require("express-flash")
 //  const session = require("express-session")
 //  const methodOverride = require('method-override');
-import passport from 'passport';
-import initializePassport from './passport-config.js';
-import flash from 'express-flash';
-import session from 'express-session';
-import methodOverride from 'method-override';
+// import passport from 'passport';
+// import initializePassport from './passport-config.js';
+// import flash from 'express-flash';
+// import session from 'express-session';
+// import methodOverride from 'method-override';
 
- const PORT = 3000;
+//  const PORT = 3000;
 
- initializePassport(
-    passport,
-    email => user.find(user => user.email === email),
-    id => user.find(user => user.id === id)
-    )
+//  initializePassport(
+//     passport,
+//     email => user.find(user => user.email === email),
+//     id => user.find(user => user.id === id)
+//     )
   
-    import dotenv from 'dotenv';
-dotenv.config();
+//     import dotenv from 'dotenv';
+// dotenv.config();
 
-//chat
-app.set('view engine', 'ejs');
+// //chat
+// app.set('view engine', 'ejs');
 
- const user = []
- app.use(express.urlencoded({extended: false}))
- app.use(flash())
- app.use(session({
-   secret: process.env.SESSION_SECRET || 'fallbackSecret',
-   resave: false, // We wont resave the session variable if nothing is changed
-   saveUninitialized: false
- }))
- app.use(passport.initialize()) 
- app.use(passport.session())
- app.use(methodOverride("_method"))
+//  const user = []
+//  app.use(express.urlencoded({extended: false}))
+//  app.use(flash())
+//  app.use(session({
+//    secret: process.env.SESSION_SECRET || 'fallbackSecret',
+//    resave: false, // We wont resave the session variable if nothing is changed
+//    saveUninitialized: false
+//  }))
+//  app.use(passport.initialize()) 
+//  app.use(passport.session())
+//  app.use(methodOverride("_method"))
 
 //  function checkNotAuthenticated(req, res, next) {
 //   if (req.isAuthenticated()) {
@@ -292,70 +292,70 @@ app.set('view engine', 'ejs');
 // }
 
 // // Configuring the register post functionality
-app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/login",
-  failureFlash: true
-}))
+// app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
+//   successRedirect: "/",
+//   failureRedirect: "/login",
+//   failureFlash: true
+// }))
 
- app.post("/register",checkNotAuthenticated, async(req, res) => {
-  try{
-          const hashedPassword = await bcrypt.hash(req.body.password, 10)
-          user.push({
-            id: Date.now().toString(),
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPassword
-          })
-          console.log(user);
-          res.redirect("/login")
-  } catch(e) {
-            console.log(e);
-             res.redirect("/register")
-  }
- })
-//Routes
+//  app.post("/register",checkNotAuthenticated, async(req, res) => {
+//   try{
+//           const hashedPassword = await bcrypt.hash(req.body.password, 10)
+//           user.push({
+//             id: Date.now().toString(),
+//             name: req.body.name,
+//             email: req.body.email,
+//             password: hashedPassword
+//           })
+//           console.log(user);
+//           res.redirect("/login")
+//   } catch(e) {
+//             console.log(e);
+//              res.redirect("/register")
+//   }
+//  })
+// //Routes
 
 
 
- app.get('/', checkAuthenticated, (req, res) => {
-  res.render("index.ejs" , {name: req.user.name})
- })
+//  app.get('/', checkAuthenticated, (req, res) => {
+//   res.render("index.ejs" , {name: req.user.name})
+//  })
 
- app.get('/login', checkNotAuthenticated , (req, res) => {
-  res.render("login.ejs" )
- })
+//  app.get('/login', checkNotAuthenticated , (req, res) => {
+//   res.render("login.ejs" )
+//  })
 
- app.get('/register', checkNotAuthenticated , (req, res) => {
-  res.render("register.ejs")
- })
- // End Routes
+//  app.get('/register', checkNotAuthenticated , (req, res) => {
+//   res.render("register.ejs")
+//  })
+//  // End Routes
 
- app.delete("/logout", (req, res) => {
-    req.logout(req.user, err => {
-        if (err) return next(err)
-        res.redirect("/")
-    })
-  })
+//  app.delete("/logout", (req, res) => {
+//     req.logout(req.user, err => {
+//         if (err) return next(err)
+//         res.redirect("/")
+//     })
+//   })
 
- function checkAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        return next()
-    }
-    res.redirect("/login")
-  }
-  function checkNotAuthenticated(req, res, next){
-      if(req.isAuthenticated()){
-          return res.redirect("/")
-      }
-      next()
-    }
+//  function checkAuthenticated(req, res, next){
+//     if(req.isAuthenticated()){
+//         return next()
+//     }
+//     res.redirect("/login")
+//   }
+//   function checkNotAuthenticated(req, res, next){
+//       if(req.isAuthenticated()){
+//           return res.redirect("/")
+//       }
+//       next()
+//     }
   
 
- app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-//  app.listen(3000)
+//  app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+// //  app.listen(3000)
 
 
 // // Importing all Libraies that we installed using npm
@@ -456,5 +456,4 @@ app.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 //   next()
 // }
 
->>>>>>> 7078e2e34829275df9d1ace15497ceb73de4552f
 // app.listen(3000)
